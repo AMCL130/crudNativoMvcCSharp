@@ -1,0 +1,84 @@
+﻿@model IEnumerable<tallerCrud.Models.Producto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Productos</h1>
+
+@*creacion de tabla con boostrap*@
+
+
+<div class="container">
+
+    @*mostrar un el mensaje de return de Create*@
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["Mensaje"]
+            <button type="button" class="close" date-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Lista de productos</h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block" asp-action="Create" asp-controller="Productos">Agregar Producto</a>
+        </div>
+
+        <form>
+            <p>
+                Buscar: <input type="text" name="buscar" class="form-text" />
+                <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+            </p>
+        </form>
+    </div>
+
+    <div class="row">
+        @*    validar si hay registros*@
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(a=>a.Id)</td>
+                        <td>@Html.DisplayNameFor(a=>a.Codigo)</td>
+                        <td>@Html.DisplayNameFor(a=>a.Nombre)</td>
+                        <td>@Html.DisplayNameFor(a=>a.Precio)</td>
+                        <td>@Html.DisplayNameFor(a=>a.Cantidad)</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*para recorrer los registros*@
+                    @foreach (var i in Model)
+                    {
+                        <tr>
+                            <td>@i.Id</td>
+                            <td>@i.Codigo</td>
+                            <td>@i.Nombre</td>
+                            <td>@i.Precio</td>
+                            <td>@i.Cantidad</td>
+                            <td>
+                                <a asp-controller="Productos" asp-action="Edit" asp-route-id="@i.Id" class="btn btn-warning">Editar</a>
+                                <a asp-controller="Productos" asp-action="Delete" asp-route-id="@i.Id" class="btn btn-danger">Eliminar</a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No Existe el registro</p>
+        }
+
+    </div>
+
+</div>
+

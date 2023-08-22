@@ -1,0 +1,63 @@
+﻿@model tallerCrud.Models.Cliente;
+@{
+    ViewData["Title"] = "Eliminar Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Eliminar cliente</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-10">
+            <form method="post" asp-action="DeleteCliente">
+
+                <input type="hidden" asp-for="Id"/>
+
+                @*                para validar modelo por parte del servidor*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Cedula" class="control.label"></label>
+                    <input asp-for="Cedula" class="form-control" disabled/>
+                    @*                    validar por parte del cliente*@
+                    <span asp-validation-for="Cedula" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nombre" class="control.label"></label>
+                    <input asp-for="Nombre" class="form-control" disabled/>
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Direccion" class="control.label"></label>
+                    <input asp-for="Direccion" class="form-control" disabled />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tel" class="control.label"></label>
+                    <input asp-for="Tel" class="form-control" disabled/>
+                    <span asp-validation-for="Tel" class="text-danger"></span>
+
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Eliminar Cliente" class="btn btn-danger" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+

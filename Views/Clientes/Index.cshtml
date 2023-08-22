@@ -1,0 +1,84 @@
+﻿@model IEnumerable<tallerCrud.Models.Cliente>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Clientes</h1>
+
+@*creacion de tabla con boostrap*@
+
+
+<div class="container">
+
+    @*mostrar un el mensaje de return de Create*@
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["Mensaje"]
+            <button type="button" class="close" date-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Lista de clientes</h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block" asp-action="Create" asp-controller="Clientes">Agregar Cliente</a>
+        </div>
+
+        <form>
+            <p>
+                Buscar: <input type="text" name="buscar" class="form-text" />
+                <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+            </p>
+        </form>
+    </div>
+
+    <div class="row">
+        @*    validar si hay registros*@
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(a=>a.Id)</td>
+                        <td>@Html.DisplayNameFor(a=>a.Cedula)</td>
+                        <td>@Html.DisplayNameFor(a=>a.Nombre)</td>
+                        <td>@Html.DisplayNameFor(a=>a.Direccion)</td>
+                        <td>@Html.DisplayNameFor(a=>a.Tel)</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*para recorrer los registros*@
+                    @foreach (var i in Model)
+                    {
+                        <tr>
+                            <td>@i.Id</td>
+                            <td>@i.Cedula</td>
+                            <td>@i.Nombre</td>
+                            <td>@i.Direccion</td>
+                            <td>@i.Tel</td>
+                            <td>
+                                <a asp-controller="Clientes" asp-action="Edit" asp-route-id="@i.Id" class="btn btn-warning">Editar</a>
+                                <a asp-controller="Clientes" asp-action="Delete" asp-route-id="@i.Id" class="btn btn-danger">Eliminar</a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No Existe el registro</p>
+        }
+
+    </div>
+
+</div>
+
